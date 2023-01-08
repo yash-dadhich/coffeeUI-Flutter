@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   // user tapped on coffee types
   void coffeeTypeSelected(int index) {
     setState(() {
-      for (int i = 1; i < coffeeType.length; i++) {
+      for (int i = 0; i < coffeeType.length - 1; i++) {
         coffeeType[i][1] = false;
       }
       coffeeType[index][1] = true;
@@ -92,17 +92,20 @@ class _HomePageState extends State<HomePage> {
 
               Container(
                 height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return CoffeeType(
-                      coffeeType: coffeeType[index][0],
-                      isSelected: coffeeType[index][1],
-                      onTap: () {
-                        coffeeTypeSelected(index);
-                      },
-                    );
-                  },
+                child: Expanded(
+                  child: ListView.builder(
+                    itemCount: coffeeType.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return CoffeeType(
+                        coffeeType: coffeeType[index][0],
+                        isSelected: coffeeType[index][1],
+                        onTap: () {
+                          coffeeTypeSelected(index);
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
 
